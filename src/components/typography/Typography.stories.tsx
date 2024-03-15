@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Typography>;
 
 export const Header: Story = {
   args: {
-    variant: "Header",
+    variant: "Heading",
     color: "black",
   },
   render: (args) => <Typography {...args}>Header</Typography>,
@@ -25,7 +25,7 @@ export const Header: Story = {
 
 export const TextPrimary: Story = {
   args: {
-    variant: "TextPrimary",
+    variant: "Body1",
     color: "black",
   },
   render: (args) => <Typography {...args}>TextPrimary</Typography>,
@@ -33,7 +33,7 @@ export const TextPrimary: Story = {
 
 export const TextSecondary: Story = {
   args: {
-    variant: "TextSecondary",
+    variant: "Body2",
     color: "black",
   },
   render: (args) => <Typography {...args}>TextSecondary</Typography>,

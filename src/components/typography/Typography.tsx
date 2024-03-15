@@ -3,27 +3,28 @@ import type { Colors } from "../../theme";
 import { theme } from "../../theme";
 
 export type TypographyProps = {
-  variant: "Header" | "TextPrimary" | "TextSecondary";
+  variant: "Heading" | "Body1" | "Body2";
   color?: Colors;
 };
 
 const variantStyles = {
-  Header: css`
+  Heading: css`
     font-size: calc(1rem * 18 / 16);
     font-weight: 600;
     line-height: 28px;
     letter-spacing: 0;
   `,
-  TextPrimary: css`
+  Body1: css`
     font-size: calc(1rem * 14 / 16);
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.1px;
   `,
-  TextSecondary: css`
+  Body2: css`
     font-size: calc(1rem * 14 / 16);
     font-weight: 600;
     line-height: 20px;
+    letter-spacing: 0.1px;
   `,
 };
 
