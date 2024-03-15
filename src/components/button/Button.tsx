@@ -5,22 +5,24 @@ import { Colors } from "../../theme";
 type ButtonProps = {
   children: React.ReactNode;
   bgColor?: Extract<Colors, "blue" | "purple">;
+  fullWidth?: boolean;
 };
 
-const StyledButton = styled.button<Pick<ButtonProps, "bgColor">>`
+type StyledButtonProps = Omit<ButtonProps, "children">;
+
+const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ theme, bgColor }) => theme.colors[bgColor || "blue"]};
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
   color: white;
   padding: 12px 16px;
-  width: 100%;
-  max-width: 100%;
   border: none;
   cursor: pointer;
 `;
 
-export function Button({ children, bgColor }: ButtonProps) {
+export function Button({ children, bgColor, fullWidth }: ButtonProps) {
   return (
-    <StyledButton bgColor={bgColor}>
-      <Typography variant="Body2" color="white">
+    <StyledButton bgColor={bgColor} fullWidth={fullWidth}>
+      <Typography variant="Text2" color="white">
         {children}
       </Typography>
     </StyledButton>

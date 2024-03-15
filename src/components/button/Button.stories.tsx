@@ -19,5 +19,6 @@ export const Primary: Story = {
   args: {
     children: "Button",
     bgColor: "blue",
+    fullWidth: false,
   },
 };
