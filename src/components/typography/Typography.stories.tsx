@@ -20,21 +20,21 @@ export const Heading: Story = {
     variant: "Heading",
     color: "black",
   },
-  render: (args) => <Typography {...args}>Header</Typography>,
+  render: (args) => <Typography {...args}>Heading</Typography>,
 };
 
-export const Body1: Story = {
+export const Text1: Story = {
   args: {
-    variant: "Body1",
+    variant: "Text1",
     color: "black",
   },
-  render: (args) => <Typography {...args}>Text Primary</Typography>,
+  render: (args) => <Typography {...args}>Text1</Typography>,
 };
 
-export const Body2: Story = {
+export const Text2: Story = {
   args: {
-    variant: "Body2",
+    variant: "Text2",
     color: "black",
   },
-  render: (args) => <Typography {...args}>Text Secondary</Typography>,
+  render: (args) => <Typography {...args}>Text2</Typography>,
 };
