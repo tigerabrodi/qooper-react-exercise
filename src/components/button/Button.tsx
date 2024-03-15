@@ -8,11 +8,15 @@ type ButtonProps = {
   fullWidth?: boolean;
 };
 
-type StyledButtonProps = Omit<ButtonProps, "children">;
+type StyledButtonProps = {
+  $bgColor?: Extract<Colors, "blue" | "purple">;
+  $fullWidth?: boolean;
+};
 
 const StyledButton = styled.button<StyledButtonProps>`
-  background-color: ${({ theme, bgColor }) => theme.colors[bgColor || "blue"]};
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  background-color: ${({ theme, $bgColor }) =>
+    theme.colors[$bgColor || "blue"]};
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
   color: white;
   padding: 12px 16px;
   border: none;
@@ -21,7 +25,7 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 export function Button({ children, bgColor, fullWidth }: ButtonProps) {
   return (
-    <StyledButton bgColor={bgColor} fullWidth={fullWidth}>
+    <StyledButton $bgColor={bgColor} $fullWidth={fullWidth}>
       <Typography variant="Text2" color="white">
         {children}
       </Typography>
