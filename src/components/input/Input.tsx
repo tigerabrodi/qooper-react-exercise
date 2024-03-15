@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Typography, typographyVariantStyles } from "..";
 import { ChangeEvent } from "react";
+import { srOnlyStyles } from "../../theme";
 
 export type InputProps = {
   ariaLabel: string;
@@ -43,13 +44,17 @@ const ErrorMessage = styled(Typography)`
   visibility: ${({ children }) =>
     children ? "visible" : "hidden"}; // Hide the message but reserve space
   margin-left: 16px;
-  height: 12px;
+  height: 20px;
 `;
 
 const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
   width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+`;
+
+const HiddenLabel = styled.label`
+  ${srOnlyStyles}
 `;
 
 export const Input = ({
@@ -65,10 +70,11 @@ export const Input = ({
 }: InputProps) => {
   return (
     <InputWrapper $fullWidth={fullWidth}>
+      <HiddenLabel htmlFor={name}>{ariaLabel}</HiddenLabel>
       <StyledInput
         $hasError={hasError}
         name={name}
-        aria-label={ariaLabel}
+        id={name}
         placeholder={placeholder}
         type={type}
         value={value}
