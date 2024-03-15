@@ -1,5 +1,11 @@
 import { css } from "styled-components";
 
+const baseTextStyles = css`
+  font-size: calc(1rem * 14 / 16);
+  line-height: 20px;
+  letter-spacing: 0.1px;
+`;
+
 /* Exporting styles from this file because fast refresh only works when a file only exports components. eslint(react-refresh/only-export-components) */
 export const typographyVariantStyles = {
   Heading: css`
@@ -9,15 +15,11 @@ export const typographyVariantStyles = {
     letter-spacing: 0;
   `,
   Text1: css`
-    font-size: calc(1rem * 14 / 16);
+    ${baseTextStyles}
     font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.1px;
   `,
   Text2: css`
-    font-size: calc(1rem * 14 / 16);
+    ${baseTextStyles}
     font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.1px;
   `,
 };

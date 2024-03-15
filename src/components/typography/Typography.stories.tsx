@@ -38,3 +38,12 @@ export const Text2: Story = {
   },
   render: (args) => <Typography {...args}>Text2</Typography>,
 };
+
+export const TextWithFontSize: Story = {
+  args: {
+    variant: "Text2",
+    color: "black",
+    fontSize: 25,
+  },
+  render: (args) => <Typography {...args}>Text with font size</Typography>,
+};
