@@ -5,8 +5,11 @@ import { ChangeEvent } from "react";
 export type InputProps = {
   ariaLabel: string;
   placeholder: string;
+  type: string;
+  name: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  fullWidth?: boolean;
   hasError?: boolean;
   errorMessage?: string;
 };
@@ -17,6 +20,7 @@ type StyledInputProps = {
 
 const StyledInput = styled.input<StyledInputProps>`
   ${typographyVariantStyles.Text1}
+  width: 100%;
   font-family: ${({ theme }) => theme.fonts.Poppins};
   color: ${({ theme }) => theme.colors.black};
   border: 1px solid
@@ -36,37 +40,43 @@ const StyledInput = styled.input<StyledInputProps>`
 `;
 
 const ErrorMessage = styled(Typography)`
+  visibility: ${({ children }) =>
+    children ? "visible" : "hidden"}; // Hide the message but reserve space
   margin-left: 16px;
-  margin-top: 2px;
+  height: 12px;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
 `;
 
 export const Input = ({
   errorMessage,
   hasError,
   ariaLabel,
-  onChange,
   placeholder,
+  type,
+  fullWidth,
   value,
+  onChange,
+  name,
 }: InputProps) => {
   return (
-    <InputWrapper>
+    <InputWrapper $fullWidth={fullWidth}>
       <StyledInput
         $hasError={hasError}
+        name={name}
         aria-label={ariaLabel}
-        onChange={onChange}
         placeholder={placeholder}
+        type={type}
         value={value}
+        onChange={onChange}
       />
-      {hasError && (
-        <ErrorMessage variant="Text1" color="red">
-          {errorMessage}
-        </ErrorMessage>
-      )}
+      <ErrorMessage variant="Text1" color="red">
+        {errorMessage}
+      </ErrorMessage>
     </InputWrapper>
   );
 };

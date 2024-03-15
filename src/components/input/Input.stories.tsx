@@ -28,7 +28,7 @@ export const Default: Story = {
         ariaLabel="input"
         placeholder="Type here..."
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(event) => setValue(event.target.value)}
       />
     );
   },
