@@ -4,6 +4,7 @@ import { Colors } from "../../theme";
 
 type ButtonProps = {
   children: React.ReactNode;
+  type: "button" | "submit" | "reset";
   bgColor?: Extract<Colors, "blue" | "purple">;
   fullWidth?: boolean;
 };
@@ -23,9 +24,9 @@ const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
 `;
 
-export function Button({ children, bgColor, fullWidth }: ButtonProps) {
+export function Button({ children, bgColor, fullWidth, type }: ButtonProps) {
   return (
-    <StyledButton $bgColor={bgColor} $fullWidth={fullWidth}>
+    <StyledButton $bgColor={bgColor} $fullWidth={fullWidth} type={type}>
       <Typography variant="Text2" color="white">
         {children}
       </Typography>
