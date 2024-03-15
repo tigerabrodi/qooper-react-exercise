@@ -1,9 +1,9 @@
 export type Colors =
   | "white"
   | "black"
-  | "redPrimary"
-  | "purplePrimary"
-  | "bluePrimary"
+  | "red"
+  | "purple"
+  | "blue"
   | "grayDark"
   | "grayMedium"
   | "grayLight";
@@ -11,9 +11,9 @@ export type Colors =
 const colors: Record<Colors, string> = {
   white: "#FFFFFF",
   black: "#171725",
-  redPrimary: "#FF4545",
-  purplePrimary: "#7000FF",
-  bluePrimary: "#0062FF",
+  red: "#FF4545",
+  purple: "#7000FF",
+  blue: "#0062FF",
   grayDark: "#92929D", // GRAY-04
   grayMedium: "#F1F1F5", // GRAY-03
   grayLight: "#FAFAFB", // GRAY-02
