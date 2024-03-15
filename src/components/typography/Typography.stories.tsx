@@ -15,7 +15,7 @@ const meta: Meta<typeof Typography> = {
 export default meta;
 type Story = StoryObj<typeof Typography>;
 
-export const Header: Story = {
+export const Heading: Story = {
   args: {
     variant: "Heading",
     color: "black",
@@ -23,18 +23,18 @@ export const Header: Story = {
   render: (args) => <Typography {...args}>Header</Typography>,
 };
 
-export const TextPrimary: Story = {
+export const Body1: Story = {
   args: {
     variant: "Body1",
     color: "black",
   },
-  render: (args) => <Typography {...args}>TextPrimary</Typography>,
+  render: (args) => <Typography {...args}>Text Primary</Typography>,
 };
 
-export const TextSecondary: Story = {
+export const Body2: Story = {
   args: {
     variant: "Body2",
     color: "black",
   },
-  render: (args) => <Typography {...args}>TextSecondary</Typography>,
+  render: (args) => <Typography {...args}>Text Secondary</Typography>,
 };
