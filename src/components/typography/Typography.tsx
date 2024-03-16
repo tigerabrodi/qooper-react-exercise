@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { ExecutionProps } from "styled-components";
 import type { Colors } from "../../theme";
 import { typographyVariantStyles } from ".";
 import { ReactNode } from "react";
@@ -23,6 +23,7 @@ export type TypographyProps = {
   children: ReactNode;
   fontSize?: number;
   color?: Colors;
+  as?: ExecutionProps["as"];
 };
 
 export function Typography({
@@ -31,6 +32,7 @@ export function Typography({
   fontSize,
   color,
   className,
+  as,
 }: TypographyProps & ClassNameProps) {
   return (
     <StyledTypography
@@ -38,6 +40,7 @@ export function Typography({
       $fontSize={fontSize}
       $color={color}
       className={className}
+      as={as}
     >
       {children}
     </StyledTypography>
