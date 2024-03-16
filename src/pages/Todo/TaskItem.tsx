@@ -75,7 +75,7 @@ export function TaskItem({ task }: { task: Task }) {
       const response = await fetch(
         `${BASE_API_URL}/users/${currentUser.id}/tasks/${task.id}`,
         {
-          method: "PATCH",
+          method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(newTask),
         }
@@ -92,6 +92,7 @@ export function TaskItem({ task }: { task: Task }) {
         prev.map((task) => (task.id === addedTask.id ? addedTask : task))
       );
 
+      setIsEditing(false);
       setEditingTaskStatus("success");
     } catch (error) {
       console.error(error);
@@ -108,6 +109,7 @@ export function TaskItem({ task }: { task: Task }) {
             name="task"
             type="text"
             placeholder="Type a task and press Enter to add"
+            disabled={editingTaskStatus === "loading"}
             fullWidth
             value={editTaskContent}
             onChange={(event) => setEditTaskContent(event.target.value)}
