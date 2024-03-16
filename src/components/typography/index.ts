@@ -1,2 +1,2 @@
 export * from "./Typography";
-export * from "./typographyStyles";
+export * from "./variables";

@@ -1,48 +1,56 @@
-import styled, { ExecutionProps } from "styled-components";
+import styled from "styled-components";
 import type { Colors } from "../../theme";
-import { typographyVariantStyles } from ".";
+import { baseTextStyles } from "./variables";
 import { ReactNode } from "react";
 import { ClassNameProps } from "../../helpers";
 
 type StyledTypographyProps = {
-  $variant: "Heading" | "Text1" | "Text2";
-  $fontSize?: number;
   $color?: Colors;
 };
 
-export const StyledTypography = styled.span<StyledTypographyProps>`
-  font-family: ${({ theme }) => theme.fonts.Poppins};
-  ${({ $variant }) => typographyVariantStyles[$variant]}
-  ${({ $color, theme }) => `color: ${theme.colors[$color || "black"]};`}
-  ${({ $fontSize }) =>
-    $fontSize && `font-size: calc(1rem * ${$fontSize} / 16);`}
+const Heading = styled.h1<StyledTypographyProps>`
+  font-size: calc(1rem * 18 / 16);
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: ${({ theme, $color }) => theme.colors[$color || "black"]};
 `;
 
-export type TypographyProps = {
+const Text1 = styled.p<StyledTypographyProps>`
+  ${baseTextStyles}
+  font-weight: 400;
+  color: ${({ theme, $color }) => theme.colors[$color || "black"]};
+`;
+
+const Text2 = styled.span<StyledTypographyProps>`
+  ${baseTextStyles}
+  font-weight: 600;
+  color: ${({ theme, $color }) => theme.colors[$color || "black"]};
+`;
+
+type TypographyProps = {
   variant: "Heading" | "Text1" | "Text2";
   children: ReactNode;
-  fontSize?: number;
   color?: Colors;
-  as?: ExecutionProps["as"];
+};
+
+const componentMap = {
+  Heading,
+  Text1,
+  Text2,
 };
 
 export function Typography({
   children,
   variant,
-  fontSize,
   color,
   className,
-  as,
 }: TypographyProps & ClassNameProps) {
+  const Component = componentMap[variant];
+
   return (
-    <StyledTypography
-      $variant={variant}
-      $fontSize={fontSize}
-      $color={color}
-      className={className}
-      as={as}
-    >
+    <Component $color={color} className={className}>
       {children}
-    </StyledTypography>
+    </Component>
   );
 }

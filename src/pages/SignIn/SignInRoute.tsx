@@ -87,9 +87,7 @@ export function SignInRoute() {
         </LoadingWrapper>
       ) : (
         <>
-          <Typography variant="Heading" as="h1">
-            Login to your account
-          </Typography>
+          <Typography variant="Heading">Login to your account</Typography>
 
           <Form onSubmit={handleSubmit}>
             <InputWrapper>

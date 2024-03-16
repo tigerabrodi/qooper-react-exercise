@@ -114,9 +114,7 @@ export function TodoRoute() {
           onChange={handleTaskInputChange}
         />
       </Form>
-      <StyledTypography variant="Heading" as="h1">
-        Tasks
-      </StyledTypography>
+      <StyledTypography variant="Heading">Tasks</StyledTypography>
       {isFetchingTasks ? (
         <LoadingWrapper role="alert" aria-label="loading">
           <Typography variant="Text1">Loading...</Typography>
