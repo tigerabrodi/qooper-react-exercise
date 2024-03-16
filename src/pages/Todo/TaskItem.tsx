@@ -4,8 +4,9 @@ import { Task, Status, BASE_API_URL } from "../../helpers";
 import { useUser } from "../../hooks";
 import { FormEvent, useState } from "react";
 import { useTodo } from "../../hooks/useTodo";
+import { useClickAway } from "@uidotdev/usehooks";
 
-const TaskItemWrapper = styled.li`
+const TaskItemWrapper = styled.li<{ $isDeleting: boolean }>`
   width: 100%;
   height: 64px;
   padding: 0 16px;
@@ -13,6 +14,7 @@ const TaskItemWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: ${({ $isDeleting }) => ($isDeleting ? 0.5 : 1)};
 `;
 
 const DeleteButton = styled.button`
@@ -25,6 +27,11 @@ const DeleteButton = styled.button`
   border-radius: 50%;
   border: 0;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 const EditButton = styled.button`
@@ -35,6 +42,11 @@ const EditButton = styled.button`
   cursor: pointer;
   border: 0;
   background-color: transparent;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 const EditForm = styled.form`
@@ -46,9 +58,15 @@ export function TaskItem({ task }: { task: Task }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTaskContent, setEditTaskContent] = useState(task.content);
   const [editingTaskStatus, setEditingTaskStatus] = useState<Status>("idle");
+  const [isDeletingTaskStatus, setIsDeletingTaskStatus] =
+    useState<Status>("idle");
 
   const { currentUser } = useUser();
   const { setTasks } = useTodo();
+
+  const ref = useClickAway<HTMLFormElement>(() => {
+    setIsEditing(false);
+  });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -100,10 +118,37 @@ export function TaskItem({ task }: { task: Task }) {
     }
   }
 
+  async function handleDelete() {
+    if (!currentUser) return;
+
+    setIsDeletingTaskStatus("loading");
+
+    try {
+      const response = await fetch(
+        `${BASE_API_URL}/users/${currentUser.id}/tasks/${task.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        setIsDeletingTaskStatus("error");
+        throw new Error("Failed to delete task");
+      }
+
+      setTasks((prev) => prev.filter((t) => t.id !== task.id));
+
+      setIsDeletingTaskStatus("success");
+    } catch (error) {
+      setIsDeletingTaskStatus("error");
+      console.error(error);
+    }
+  }
+
   return (
-    <TaskItemWrapper>
+    <TaskItemWrapper $isDeleting={isDeletingTaskStatus === "loading"}>
       {isEditing ? (
-        <EditForm onSubmit={handleSubmit} onBlur={() => setIsEditing(false)}>
+        <EditForm onSubmit={handleSubmit} ref={ref}>
           <Input
             ariaLabel="Edit task"
             name="task"
@@ -111,17 +156,24 @@ export function TaskItem({ task }: { task: Task }) {
             placeholder="Type a task and press Enter to add"
             disabled={editingTaskStatus === "loading"}
             fullWidth
+            autoFocus
             value={editTaskContent}
             onChange={(event) => setEditTaskContent(event.target.value)}
           />
         </EditForm>
       ) : (
-        <EditButton onClick={() => setIsEditing(true)}>
+        <EditButton
+          onClick={() => setIsEditing(true)}
+          disabled={isDeletingTaskStatus === "loading"}
+        >
           <Typography variant="Text1">{task.content}</Typography>
         </EditButton>
       )}
 
-      <DeleteButton>
+      <DeleteButton
+        onClick={handleDelete}
+        disabled={isDeletingTaskStatus === "loading"}
+      >
         <Typography variant="Text2" color="white">
           X
         </Typography>
