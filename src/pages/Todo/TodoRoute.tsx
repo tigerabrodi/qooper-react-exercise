@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { Input, Typography } from '../../components'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { BASE_API_URL, Status, Task } from '../../helpers'
+import { Status } from '../../helpers'
 import { useUser } from '../../hooks'
 import { TaskList } from './TaskList'
 import { useTodo } from '../../hooks/useTodo'
+import { createTask } from '../../services'
 
 const Main = styled.main`
   display: flex;
@@ -64,21 +65,7 @@ export function TodoRoute() {
     }
 
     try {
-      const response = await fetch(
-        `${BASE_API_URL}/users/${currentUser.id}/tasks`,
-        {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(newTask),
-        }
-      )
-
-      if (!response.ok) {
-        setAddingTaskStatus('error')
-        throw new Error('Failed to create task')
-      }
-
-      const addedTask = (await response.json()) as Task
+      const addedTask = await createTask({ currentUser, newTask })
 
       setTasks((prevTasks) => [...prevTasks, addedTask])
       setTaskInputValue('')

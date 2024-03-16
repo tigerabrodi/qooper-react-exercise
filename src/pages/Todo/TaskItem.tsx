@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { Input, Typography } from '../../components'
-import { Task, Status, BASE_API_URL } from '../../helpers'
+import { Task, Status } from '../../helpers'
 import { useUser } from '../../hooks'
 import { FormEvent, useState } from 'react'
 import { useTodo } from '../../hooks/useTodo'
 import { useClickAway } from '@uidotdev/usehooks'
+import { deleteTask, updateTask } from '../../services'
 
 const TaskItemWrapper = styled.li<{ $isDeleting: boolean }>`
   width: 100%;
@@ -34,13 +35,16 @@ const DeleteButton = styled.button`
 `
 
 const EditButton = styled.button`
-  width: 560px;
+  width: 544px;
   height: 40px;
   display: flex;
   align-items: center;
   cursor: pointer;
   border: 0;
   background-color: transparent;
+
+  // 16px margin left + 1px for the border of the input to avoid flickering
+  margin-left: 17px;
 
   &:disabled {
     opacity: 0.5;
@@ -66,7 +70,7 @@ export function TaskItem({ task }: { task: Task }) {
     setIsEditing(false)
   })
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handlEditSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (!currentUser) return
@@ -88,21 +92,11 @@ export function TaskItem({ task }: { task: Task }) {
     }
 
     try {
-      const response = await fetch(
-        `${BASE_API_URL}/users/${currentUser.id}/tasks/${task.id}`,
-        {
-          method: 'PUT',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(newTask),
-        }
-      )
-
-      if (!response.ok) {
-        setEditingTaskStatus('error')
-        throw new Error('Failed to create task')
-      }
-
-      const addedTask = (await response.json()) as Task
+      const addedTask = await updateTask({
+        currentUser,
+        taskId: task.id,
+        newTask,
+      })
 
       setTasks((prev) =>
         prev.map((task) => (task.id === addedTask.id ? addedTask : task))
@@ -122,17 +116,7 @@ export function TaskItem({ task }: { task: Task }) {
     setIsDeletingTaskStatus('loading')
 
     try {
-      const response = await fetch(
-        `${BASE_API_URL}/users/${currentUser.id}/tasks/${task.id}`,
-        {
-          method: 'DELETE',
-        }
-      )
-
-      if (!response.ok) {
-        setIsDeletingTaskStatus('error')
-        throw new Error('Failed to delete task')
-      }
+      await deleteTask({ currentUser, taskId: task.id })
 
       setTasks((prev) => prev.filter((t) => t.id !== task.id))
 
@@ -146,7 +130,7 @@ export function TaskItem({ task }: { task: Task }) {
   return (
     <TaskItemWrapper $isDeleting={isDeletingTaskStatus === 'loading'}>
       {isEditing ? (
-        <EditForm onSubmit={handleSubmit} ref={ref}>
+        <EditForm onSubmit={handlEditSubmit} ref={ref}>
           <Input
             ariaLabel="Edit task"
             name="task"
@@ -163,6 +147,7 @@ export function TaskItem({ task }: { task: Task }) {
         <EditButton
           onClick={() => setIsEditing(true)}
           disabled={isDeletingTaskStatus === 'loading'}
+          aria-label={`Edit task ${task.content}`}
         >
           <Typography variant="Text1">{task.content}</Typography>
         </EditButton>
@@ -170,6 +155,7 @@ export function TaskItem({ task }: { task: Task }) {
 
       <DeleteButton
         onClick={handleDelete}
+        aria-label={`Delete task ${task.content}`}
         disabled={isDeletingTaskStatus === 'loading'}
       >
         <Typography variant="Text2" color="white">

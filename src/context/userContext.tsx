@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
 import { BASE_API_URL, User } from '../helpers'
 
-type CurrentUser = Pick<User, 'id' | 'firstName'> | null
+export type CurrentUser = Pick<User, 'id' | 'firstName'> | null
 
 export type UserContextType = {
   currentUser: CurrentUser
