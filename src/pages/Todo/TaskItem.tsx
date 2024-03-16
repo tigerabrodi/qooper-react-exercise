@@ -29,7 +29,6 @@ const DeleteButton = styled.button`
   cursor: pointer;
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.5;
   }
 `
@@ -44,7 +43,6 @@ const EditButton = styled.button`
   background-color: transparent;
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.5;
   }
 `
