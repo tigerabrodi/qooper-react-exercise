@@ -1,9 +1,10 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import { AppProviders } from "./context";
-import { SignIn, TodoList } from "./pages";
+import { AppProviders, TodoProvider } from "./context";
+import { SignInRoute, TodoRoute } from "./pages";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import { useUser } from "./hooks";
+import { Navigation } from "./components";
 
 function Routes() {
   const { currentUser, hasInitializedAuthState } = useUser();
@@ -15,10 +16,17 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/">
-        {currentUser ? <TodoList /> : <Redirect to="/signin" />}
+        {currentUser ? (
+          <TodoProvider>
+            <Navigation />
+            <TodoRoute />
+          </TodoProvider>
+        ) : (
+          <Redirect to="/signin" />
+        )}
       </Route>
       <Route path="/signin">
-        {currentUser ? <Redirect to="/" /> : <SignIn />}
+        {currentUser ? <Redirect to="/" /> : <SignInRoute />}
       </Route>
     </Switch>
   );

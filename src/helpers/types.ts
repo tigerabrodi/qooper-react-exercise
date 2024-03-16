@@ -1,10 +1,16 @@
 export type User = {
-  createdAt: string;
-  name: string;
-  avatar: string;
   token: string;
   id: string;
-  username: string;
   firstName: string;
-  lastName: string;
 };
+
+export type Task = {
+  id: string;
+  content: string;
+};
+
+export type ClassNameProps = {
+  className?: string;
+};
+
+export type Status = "idle" | "loading" | "success" | "error";
