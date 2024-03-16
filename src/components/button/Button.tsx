@@ -1,29 +1,29 @@
-import styled from "styled-components";
-import { Typography } from "..";
-import { Colors } from "../../theme";
-import { ClassNameProps } from "../../helpers";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import styled from 'styled-components'
+import { Typography } from '..'
+import { Colors } from '../../theme'
+import { ClassNameProps } from '../../helpers'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 
 type ButtonProps = {
-  children: ReactNode;
-  bgColor?: Extract<Colors, "blue" | "purple">;
-  fullWidth?: boolean;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+  children: ReactNode
+  bgColor?: Extract<Colors, 'blue' | 'purple'>
+  fullWidth?: boolean
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 type StyledButtonProps = {
-  $bgColor?: Extract<Colors, "blue" | "purple">;
-  $fullWidth?: boolean;
-};
+  $bgColor?: Extract<Colors, 'blue' | 'purple'>
+  $fullWidth?: boolean
+}
 
 const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ theme, $bgColor }) =>
-    theme.colors[$bgColor || "blue"]};
-  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+    theme.colors[$bgColor || 'blue']};
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
   color: white;
   padding: 12px 16px;
   border: none;
   cursor: pointer;
-`;
+`
 
 export function Button({
   children,
@@ -43,5 +43,5 @@ export function Button({
         {children}
       </Typography>
     </StyledButton>
-  );
+  )
 }

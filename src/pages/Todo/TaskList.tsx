@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { TaskItem } from "./TaskItem";
-import { Task } from "../../helpers";
+import styled from 'styled-components'
+import { TaskItem } from './TaskItem'
+import { Task } from '../../helpers'
 
 const TasksWrapper = styled.ul`
   display: flex;
@@ -9,7 +9,7 @@ const TasksWrapper = styled.ul`
   margin-top: 32px;
   row-gap: 2px;
   width: 100%;
-`;
+`
 
 export function TaskList({ tasks }: { tasks: Array<Task> }) {
   return (
@@ -18,5 +18,5 @@ export function TaskList({ tasks }: { tasks: Array<Task> }) {
         <TaskItem key={task.id} task={task} />
       ))}
     </TasksWrapper>
-  );
+  )
 }

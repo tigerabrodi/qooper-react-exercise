@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { Meta, StoryObj } from "@storybook/react";
-import { Input } from "./Input";
+import { useState } from 'react'
+import { Meta, StoryObj } from '@storybook/react'
+import { Input } from './Input'
 
 const meta: Meta<typeof Input> = {
-  title: "Components/Input",
+  title: 'Components/Input',
   component: Input,
   argTypes: {
     hasError: {
-      control: "boolean",
+      control: 'boolean',
     },
     errorMessage: {
-      control: "text",
+      control: 'text',
     },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof Input>
 
 export const Default: Story = {
   render: (args) => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('')
     return (
       <Input
         {...args}
@@ -30,13 +30,13 @@ export const Default: Story = {
         value={value}
         onChange={(event) => setValue(event.target.value)}
       />
-    );
+    )
   },
-};
+}
 
 export const WithError: Story = {
   render: (args) => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('')
     return (
       <Input
         {...args}
@@ -45,10 +45,10 @@ export const WithError: Story = {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-    );
+    )
   },
   args: {
     hasError: true,
-    errorMessage: "Error message",
+    errorMessage: 'Error message',
   },
-};
+}

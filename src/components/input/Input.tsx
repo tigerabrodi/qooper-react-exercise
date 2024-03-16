@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { baseTextStyles } from "..";
-import { InputHTMLAttributes } from "react";
-import { srOnlyStyles } from "../../theme";
-import { ClassNameProps } from "../../helpers";
+import styled from 'styled-components'
+import { baseTextStyles } from '..'
+import { InputHTMLAttributes } from 'react'
+import { srOnlyStyles } from '../../theme'
+import { ClassNameProps } from '../../helpers'
 
 export type InputProps = {
-  ariaLabel: string;
-  hasError?: boolean;
-  errorMessage?: string;
-  fullWidth?: boolean;
-} & InputHTMLAttributes<HTMLInputElement>;
+  ariaLabel: string
+  hasError?: boolean
+  errorMessage?: string
+  fullWidth?: boolean
+} & InputHTMLAttributes<HTMLInputElement>
 
 type StyledInputProps = {
-  $hasError?: boolean;
-};
+  $hasError?: boolean
+}
 
 const StyledInput = styled.input<StyledInputProps>`
   ${baseTextStyles}
@@ -37,27 +37,27 @@ const StyledInput = styled.input<StyledInputProps>`
   &:disabled {
     opacity: 0.5;
   }
-`;
+`
 
 const ErrorMessage = styled.span`
   ${baseTextStyles}
   visibility: ${({ children }) =>
-    children ? "visible" : "hidden"}; // Hide the message but reserve space
+    children ? 'visible' : 'hidden'}; // Hide the message but reserve space
   margin-left: 16px;
   height: 20px;
   font-size: calc(1rem * 10 / 16);
   color: ${({ theme }) => theme.colors.red};
-`;
+`
 
 const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
-  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
-`;
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
+`
 
 const HiddenLabel = styled.label`
   ${srOnlyStyles}
-`;
+`
 
 export const Input = ({
   errorMessage,
@@ -73,5 +73,5 @@ export const Input = ({
       <StyledInput $hasError={hasError} {...inputProps} />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputWrapper>
-  );
-};
+  )
+}

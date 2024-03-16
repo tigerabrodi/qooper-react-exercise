@@ -5,57 +5,57 @@ import {
   ReactNode,
   SetStateAction,
   Dispatch,
-} from "react";
-import { BASE_API_URL, Status, Task } from "../helpers";
-import { useUser } from "../hooks";
+} from 'react'
+import { BASE_API_URL, Status, Task } from '../helpers'
+import { useUser } from '../hooks'
 
 export type TodoContextType = {
-  isFetchingTasks: boolean;
-  tasks: Array<Task>;
-  setTasks: Dispatch<SetStateAction<Array<Task>>>;
-};
+  isFetchingTasks: boolean
+  tasks: Array<Task>
+  setTasks: Dispatch<SetStateAction<Array<Task>>>
+}
 
-export const TodoContext = createContext<TodoContextType | null>(null);
+export const TodoContext = createContext<TodoContextType | null>(null)
 
 export function TodoProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<Array<Task>>([]);
+  const [tasks, setTasks] = useState<Array<Task>>([])
   const [fetchingTaskStatus, setFetchingTaskStatus] =
-    useState<Status>("loading");
+    useState<Status>('loading')
 
-  const { currentUser } = useUser();
+  const { currentUser } = useUser()
 
   useEffect(() => {
     async function fetchTasks() {
-      if (!currentUser) return;
+      if (!currentUser) return
 
       try {
         const response = await fetch(
           `${BASE_API_URL}/users/${currentUser.id}/tasks`
-        );
+        )
 
-        const hasNoTasks = !response.ok && response.status === 404;
+        const hasNoTasks = !response.ok && response.status === 404
         if (hasNoTasks) {
-          setFetchingTaskStatus("success");
-          return;
+          setFetchingTaskStatus('success')
+          return
         }
 
-        const tasks = (await response.json()) as Task[];
-        setTasks(tasks);
-        setFetchingTaskStatus("success");
+        const tasks = (await response.json()) as Task[]
+        setTasks(tasks)
+        setFetchingTaskStatus('success')
       } catch (error) {
-        console.error("this is the error", error);
-        setFetchingTaskStatus("error");
+        console.error('this is the error', error)
+        setFetchingTaskStatus('error')
       }
     }
 
-    fetchTasks();
-  }, [currentUser]);
+    fetchTasks()
+  }, [currentUser])
 
-  const isFetchingTasks = fetchingTaskStatus === "loading";
+  const isFetchingTasks = fetchingTaskStatus === 'loading'
 
   return (
     <TodoContext.Provider value={{ isFetchingTasks, tasks, setTasks }}>
       {children}
     </TodoContext.Provider>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router } from "react-router-dom";
-import { GlobalStyles, theme } from "../theme";
-import { UserProvider } from ".";
-import { ReactNode } from "react";
+import { ThemeProvider } from 'styled-components'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { GlobalStyles, theme } from '../theme'
+import { UserProvider } from '.'
+import { ReactNode } from 'react'
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -12,5 +12,5 @@ export function AppProviders({ children }: { children: ReactNode }) {
         <UserProvider>{children}</UserProvider>
       </Router>
     </ThemeProvider>
-  );
+  )
 }

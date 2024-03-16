@@ -1,1 +1,1 @@
-export * from "./TodoRoute";
+export * from './TodoRoute'

@@ -1,16 +1,16 @@
-import { Redirect, Route, Switch } from "react-router-dom";
-import { AppProviders, TodoProvider } from "./context";
-import { SignInRoute, TodoRoute } from "./pages";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/600.css";
-import { useUser } from "./hooks";
-import { Navigation } from "./components";
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { AppProviders, TodoProvider } from './context'
+import { SignInRoute, TodoRoute } from './pages'
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/600.css'
+import { useUser } from './hooks'
+import { Navigation } from './components'
 
 function Routes() {
-  const { currentUser, hasInitializedAuthState } = useUser();
+  const { currentUser, hasInitializedAuthState } = useUser()
 
   if (!hasInitializedAuthState) {
-    return null;
+    return null
   }
 
   return (
@@ -29,7 +29,7 @@ function Routes() {
         {currentUser ? <Redirect to="/" /> : <SignInRoute />}
       </Route>
     </Switch>
-  );
+  )
 }
 
 export function App() {
@@ -37,5 +37,5 @@ export function App() {
     <AppProviders>
       <Routes />
     </AppProviders>
-  );
+  )
 }

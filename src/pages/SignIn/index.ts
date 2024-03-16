@@ -1,1 +1,1 @@
-export * from "./SignInRoute";
+export * from './SignInRoute'
