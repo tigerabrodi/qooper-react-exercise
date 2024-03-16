@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Typography, Input, Button } from "../components";
+import { Typography, Input, Button } from "../../components";
 import styled from "styled-components";
-import { useUser } from "../hooks";
+import { useUser } from "../../hooks";
+import { Status } from "../../helpers";
 
 const Main = styled.main`
   display: flex;
@@ -30,9 +31,7 @@ const LoadingWrapper = styled.div`
   margin: auto;
 `;
 
-type Status = "idle" | "loading" | "success" | "error";
-
-export function SignIn() {
+export function SignInRoute() {
   const [formData, setFormData] = useState({
     username: "",
     firstName: "",
