@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Typography, typographyVariantStyles } from "..";
+import { baseTextStyles } from "..";
 import { InputHTMLAttributes } from "react";
 import { srOnlyStyles } from "../../theme";
 import { ClassNameProps } from "../../helpers";
@@ -16,9 +16,8 @@ type StyledInputProps = {
 };
 
 const StyledInput = styled.input<StyledInputProps>`
-  ${typographyVariantStyles.Text1}
+  ${baseTextStyles}
   width: 100%;
-  font-family: ${({ theme }) => theme.fonts.Poppins};
   color: ${({ theme }) => theme.colors.black};
   border: 1px solid
     ${({ theme, $hasError }) =>
@@ -40,11 +39,14 @@ const StyledInput = styled.input<StyledInputProps>`
   }
 `;
 
-const ErrorMessage = styled(Typography)`
+const ErrorMessage = styled.span`
+  ${baseTextStyles}
   visibility: ${({ children }) =>
     children ? "visible" : "hidden"}; // Hide the message but reserve space
   margin-left: 16px;
   height: 20px;
+  font-size: calc(1rem * 10 / 16);
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
@@ -69,9 +71,7 @@ export const Input = ({
     <InputWrapper $fullWidth={fullWidth} className={className}>
       <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
       <StyledInput $hasError={hasError} {...inputProps} />
-      <ErrorMessage variant="Text1" color="red" fontSize={10}>
-        {errorMessage}
-      </ErrorMessage>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputWrapper>
   );
 };
