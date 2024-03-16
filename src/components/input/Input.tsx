@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Typography, typographyVariantStyles } from "..";
 import { ChangeEvent } from "react";
 import { srOnlyStyles } from "../../theme";
+import { ClassNameProps } from "../../helpers";
 
 export type InputProps = {
   ariaLabel: string;
@@ -10,6 +11,7 @@ export type InputProps = {
   name: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
   fullWidth?: boolean;
   hasError?: boolean;
   errorMessage?: string;
@@ -37,6 +39,10 @@ const StyledInput = styled.input<StyledInputProps>`
 
   &:focus {
     outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 `;
 
@@ -67,9 +73,11 @@ export const Input = ({
   value,
   onChange,
   name,
-}: InputProps) => {
+  disabled,
+  className,
+}: InputProps & ClassNameProps) => {
   return (
-    <InputWrapper $fullWidth={fullWidth}>
+    <InputWrapper $fullWidth={fullWidth} className={className}>
       <HiddenLabel htmlFor={name}>{ariaLabel}</HiddenLabel>
       <StyledInput
         $hasError={hasError}
@@ -79,6 +87,7 @@ export const Input = ({
         type={type}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
       <ErrorMessage variant="Text1" color="red" fontSize={10}>
         {errorMessage}
