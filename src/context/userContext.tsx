@@ -8,6 +8,7 @@ export type UserContextType = {
   currentUser: CurrentUser;
   login: (formData: FormData) => Promise<void>;
   logout: () => void;
+  hasInitializedAuthState: boolean;
 };
 
 export const UserContext = createContext<UserContextType | null>(null);
@@ -20,6 +21,7 @@ type FormData = {
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<CurrentUser>(null);
+  const [hasInitializedAuthState, setHasInitializedAuthState] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -27,12 +29,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const user = localStorage.getItem("user");
     if (token && user) {
       setCurrentUser(JSON.parse(user));
-      history.push("/");
+      setHasInitializedAuthState(true);
     } else {
       localStorage.clear();
-      history.push("/signin");
+      setHasInitializedAuthState(true);
     }
-  }, [history]);
+  }, []);
 
   const login = async (formData: FormData) => {
     try {
@@ -63,7 +65,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <UserContext.Provider value={{ currentUser, login, logout }}>
+    <UserContext.Provider
+      value={{ currentUser, login, logout, hasInitializedAuthState }}
+    >
       {children}
     </UserContext.Provider>
   );
