@@ -34,7 +34,6 @@ export function TodoProvider({ children }: { children: ReactNode }) {
         setTasks(tasks)
         setFetchingTaskStatus('success')
       } catch (error) {
-        console.error('this is the error', error)
         setFetchingTaskStatus('error')
       }
     }

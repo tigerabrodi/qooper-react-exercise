@@ -105,7 +105,6 @@ export function TaskItem({ task }: { task: Task }) {
       setIsEditing(false)
       setEditingTaskStatus('success')
     } catch (error) {
-      console.error(error)
       setEditingTaskStatus('error')
     }
   }
@@ -123,7 +122,6 @@ export function TaskItem({ task }: { task: Task }) {
       setIsDeletingTaskStatus('success')
     } catch (error) {
       setIsDeletingTaskStatus('error')
-      console.error(error)
     }
   }
 

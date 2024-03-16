@@ -71,7 +71,6 @@ export function TodoRoute() {
       setTaskInputValue('')
       setAddingTaskStatus('success')
     } catch (error) {
-      console.error(error)
       setAddingTaskStatus('error')
     }
   }
