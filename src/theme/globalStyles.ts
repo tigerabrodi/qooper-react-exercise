@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: inherit;
+    font-family: ${({ theme }) => theme.fonts.Poppins};
   }
 
   html {
