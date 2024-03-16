@@ -93,6 +93,7 @@ export function SignInRoute() {
             <InputWrapper>
               <Input
                 name="username"
+                id="username"
                 type="text"
                 placeholder="Username"
                 ariaLabel="username"
@@ -104,6 +105,7 @@ export function SignInRoute() {
               />
               <Input
                 name="firstName"
+                id="firstName"
                 type="text"
                 placeholder="First Name"
                 ariaLabel="first name"
@@ -117,6 +119,7 @@ export function SignInRoute() {
               />
               <Input
                 name="lastName"
+                id="lastName"
                 type="text"
                 placeholder="Last Name"
                 ariaLabel="last name"
