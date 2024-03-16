@@ -2,15 +2,13 @@ import styled from "styled-components";
 import { Typography } from "..";
 import { Colors } from "../../theme";
 import { ClassNameProps } from "../../helpers";
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonProps = {
   children: ReactNode;
-  type?: "button" | "submit" | "reset";
-  onClick?: () => void;
   bgColor?: Extract<Colors, "blue" | "purple">;
   fullWidth?: boolean;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 type StyledButtonProps = {
   $bgColor?: Extract<Colors, "blue" | "purple">;
@@ -31,17 +29,15 @@ export function Button({
   children,
   bgColor,
   fullWidth,
-  type,
-  onClick,
   className,
+  ...buttonProps
 }: ButtonProps & ClassNameProps) {
   return (
     <StyledButton
       $bgColor={bgColor}
       $fullWidth={fullWidth}
-      type={type}
-      onClick={onClick}
       className={className}
+      {...buttonProps}
     >
       <Typography variant="Text2" color="white">
         {children}
