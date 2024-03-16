@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { Typography } from "..";
 import { Colors } from "../../theme";
+import { ClassNameProps } from "../../helpers";
+import { ReactNode } from "react";
 
 type ButtonProps = {
-  children: React.ReactNode;
-  type: "button" | "submit" | "reset";
+  children: ReactNode;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
   bgColor?: Extract<Colors, "blue" | "purple">;
   fullWidth?: boolean;
 };
@@ -24,9 +27,22 @@ const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
 `;
 
-export function Button({ children, bgColor, fullWidth, type }: ButtonProps) {
+export function Button({
+  children,
+  bgColor,
+  fullWidth,
+  type,
+  onClick,
+  className,
+}: ButtonProps & ClassNameProps) {
   return (
-    <StyledButton $bgColor={bgColor} $fullWidth={fullWidth} type={type}>
+    <StyledButton
+      $bgColor={bgColor}
+      $fullWidth={fullWidth}
+      type={type}
+      onClick={onClick}
+      className={className}
+    >
       <Typography variant="Text2" color="white">
         {children}
       </Typography>
