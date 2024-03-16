@@ -33,15 +33,17 @@ export function TodoProvider({ children }: { children: ReactNode }) {
           `${BASE_API_URL}/users/${currentUser.id}/tasks`
         );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch tasks");
+        const hasNoTasks = !response.ok && response.status === 404;
+        if (hasNoTasks) {
+          setFetchingTaskStatus("success");
+          return;
         }
 
         const tasks = (await response.json()) as Task[];
         setTasks(tasks);
         setFetchingTaskStatus("success");
       } catch (error) {
-        console.error(error);
+        console.error("this is the error", error);
         setFetchingTaskStatus("error");
       }
     }
