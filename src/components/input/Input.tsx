@@ -24,8 +24,9 @@ const StyledInput = styled.input<StyledInputProps>`
       $hasError ? theme.colors.red : theme.colors.grayMedium};
 
   background-color: ${({ theme }) => theme.colors.grayLight};
+  padding: 0 16px;
+  height: 40px;
 
-  padding: 12px 16px;
   &::placeholder {
     color: ${({ theme }) => theme.colors.grayDark};
   }
