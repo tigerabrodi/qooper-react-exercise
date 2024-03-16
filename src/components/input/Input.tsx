@@ -1,21 +1,15 @@
 import styled from "styled-components";
 import { Typography, typographyVariantStyles } from "..";
-import { ChangeEvent } from "react";
+import { InputHTMLAttributes } from "react";
 import { srOnlyStyles } from "../../theme";
 import { ClassNameProps } from "../../helpers";
 
 export type InputProps = {
   ariaLabel: string;
-  placeholder: string;
-  type: string;
-  name: string;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
-  fullWidth?: boolean;
   hasError?: boolean;
   errorMessage?: string;
-};
+  fullWidth?: boolean;
+} & InputHTMLAttributes<HTMLInputElement>;
 
 type StyledInputProps = {
   $hasError?: boolean;
@@ -67,28 +61,14 @@ export const Input = ({
   errorMessage,
   hasError,
   ariaLabel,
-  placeholder,
-  type,
   fullWidth,
-  value,
-  onChange,
-  name,
-  disabled,
   className,
+  ...inputProps
 }: InputProps & ClassNameProps) => {
   return (
     <InputWrapper $fullWidth={fullWidth} className={className}>
-      <HiddenLabel htmlFor={name}>{ariaLabel}</HiddenLabel>
-      <StyledInput
-        $hasError={hasError}
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-      />
+      <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
+      <StyledInput $hasError={hasError} {...inputProps} />
       <ErrorMessage variant="Text1" color="red" fontSize={10}>
         {errorMessage}
       </ErrorMessage>
