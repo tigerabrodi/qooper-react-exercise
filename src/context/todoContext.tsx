@@ -6,8 +6,9 @@ import {
   SetStateAction,
   Dispatch,
 } from 'react'
-import { BASE_API_URL, Status, Task } from '../helpers'
+import { Status, Task } from '../helpers'
 import { useUser } from '../hooks'
+import { getTasks } from '../services'
 
 export type TodoContextType = {
   isFetchingTasks: boolean
@@ -29,17 +30,7 @@ export function TodoProvider({ children }: { children: ReactNode }) {
       if (!currentUser) return
 
       try {
-        const response = await fetch(
-          `${BASE_API_URL}/users/${currentUser.id}/tasks`
-        )
-
-        const hasNoTasks = !response.ok && response.status === 404
-        if (hasNoTasks) {
-          setFetchingTaskStatus('success')
-          return
-        }
-
-        const tasks = (await response.json()) as Task[]
+        const tasks = await getTasks({ currentUser })
         setTasks(tasks)
         setFetchingTaskStatus('success')
       } catch (error) {

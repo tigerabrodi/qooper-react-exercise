@@ -1,23 +1,24 @@
 import { createContext, useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { BASE_API_URL, User } from '../helpers'
+import { User } from '../helpers'
+import { createUser } from '../services'
 
 export type CurrentUser = Pick<User, 'id' | 'firstName'> | null
 
+type UserData = {
+  username: string
+  firstName: string
+  lastName: string
+}
+
 export type UserContextType = {
   currentUser: CurrentUser
-  login: (formData: FormData) => Promise<void>
+  login: (userData: UserData) => Promise<void>
   logout: () => void
   hasInitializedAuthState: boolean
 }
 
 export const UserContext = createContext<UserContextType | null>(null)
-
-type FormData = {
-  username: string
-  firstName: string
-  lastName: string
-}
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<CurrentUser>(null)
@@ -36,14 +37,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const login = async (formData: FormData) => {
+  const login = async (userData: UserData) => {
     try {
-      const response = await fetch(`${BASE_API_URL}/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      const user = (await response.json()) as User
+      const user = await createUser(userData)
       const newCurrentUser = { id: user.id, firstName: user.firstName }
 
       localStorage.setItem('token', user.token)

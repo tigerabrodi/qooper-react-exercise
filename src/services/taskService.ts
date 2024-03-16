@@ -71,3 +71,24 @@ export async function createTask({ newTask, currentUser }: CreateTaskParams) {
 
   return await response.json()
 }
+
+type GetTasksParams = {
+  currentUser: CurrentUser
+}
+
+export async function getTasks({ currentUser }: GetTasksParams) {
+  if (!currentUser) return
+
+  const response = await fetch(`${BASE_API_URL}/users/${currentUser.id}/tasks`)
+
+  const hasNoTasks = !response.ok && response.status === 404
+  if (hasNoTasks) {
+    return { tasks: [] }
+  }
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch tasks')
+  }
+
+  return await response.json()
+}
