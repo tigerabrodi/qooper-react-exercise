@@ -80,7 +80,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
       />
-      <ErrorMessage variant="Text1" color="red">
+      <ErrorMessage variant="Text1" color="red" fontSize={10}>
         {errorMessage}
       </ErrorMessage>
     </InputWrapper>
