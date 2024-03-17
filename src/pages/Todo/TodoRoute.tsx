@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input, Typography } from '../../components'
+import { Textbox, Typography } from '../../components'
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { Status } from '../../helpers'
 import { useUser } from '../../hooks'
@@ -14,7 +14,7 @@ const Main = styled.main`
   width: 632px;
 `
 
-const StyledInput = styled(Input)`
+const StyledTextbox = styled(Textbox)`
   margin-top: 64px;
 `
 
@@ -97,7 +97,7 @@ export function TodoRoute() {
   return (
     <Main>
       <Form onSubmit={handleSubmit}>
-        <StyledInput
+        <StyledTextbox
           placeholder="Type a task and press Enter to add"
           ariaLabel="Type a task and press Enter to add"
           name="newTask"

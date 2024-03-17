@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input, Typography } from '../../components'
+import { Textbox, Typography } from '../../components'
 import { Task, Status } from '../../helpers'
 import { useUser } from '../../hooks'
 import { FormEvent, useState } from 'react'
@@ -129,7 +129,7 @@ export function TaskItem({ task }: { task: Task }) {
     <TaskItemWrapper $isDeleting={isDeletingTaskStatus === 'loading'}>
       {isEditing ? (
         <EditForm onSubmit={handlEditSubmit} ref={ref}>
-          <Input
+          <Textbox
             ariaLabel={`Edit task ${task.content}`}
             name="editTask"
             id="editTask"

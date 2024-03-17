@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { Typography, Input, Button } from '../../components'
+import { Typography, Textbox, Button } from '../../components'
 import styled from 'styled-components'
 import { useUser } from '../../hooks'
 import { Status } from '../../helpers'
@@ -92,7 +92,7 @@ export function SignInRoute() {
 
           <Form onSubmit={handleSubmit}>
             <InputWrapper>
-              <Input
+              <Textbox
                 name="username"
                 id="username"
                 type="text"
@@ -104,7 +104,7 @@ export function SignInRoute() {
                 hasError={formErrors.username}
                 errorMessage="Username is required"
               />
-              <Input
+              <Textbox
                 name="firstName"
                 id="firstName"
                 type="text"
@@ -116,7 +116,7 @@ export function SignInRoute() {
                 hasError={formErrors.firstName}
                 errorMessage="First name is required"
               />
-              <Input
+              <Textbox
                 name="lastName"
                 id="lastName"
                 type="text"

@@ -4,7 +4,7 @@ import { InputHTMLAttributes, forwardRef } from 'react'
 import { srOnlyStyles } from '../../theme'
 import { ClassNameProps } from '../../helpers'
 
-export type InputProps = {
+export type TextboxProps = {
   /**
    * The accessible label for the input.
    */
@@ -60,7 +60,7 @@ const ErrorMessage = styled.span`
   left: 16px;
 `
 
-const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
+const Wrapper = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -71,17 +71,20 @@ const HiddenLabel = styled.label`
   ${srOnlyStyles}
 `
 
-export const Input = forwardRef<HTMLInputElement, InputProps & ClassNameProps>(
+export const Textbox = forwardRef<
+  HTMLInputElement,
+  TextboxProps & ClassNameProps
+>(
   (
     { errorMessage, hasError, ariaLabel, fullWidth, className, ...inputProps },
     ref
   ) => {
     return (
-      <InputWrapper $fullWidth={fullWidth} className={className}>
+      <Wrapper $fullWidth={fullWidth} className={className}>
         <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
         <StyledInput $hasError={hasError} ref={ref} {...inputProps} />
         {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </InputWrapper>
+      </Wrapper>
     )
   }
 )

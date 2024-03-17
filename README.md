@@ -96,7 +96,7 @@ I'm using Mock Service Worker (MSW) to mock the API calls. MSW is a library that
 
 I built the app with accessibility in mind. I used semantic HTML and added ARIA attributes where necessary. This is also where Testing Library helps, because of its accessible queries. It helped me spot areas where I could improve the accessibility of the app.
 
-An example is the `Input` component where I added a hidden label associated with the input to give it an accessible name. It's hidden visually but screen readers can still read it.
+An example is the `Textbox` component where I added a hidden label associated with the input to give it an accessible name. It's hidden visually but screen readers can still read it.
 
 # Notes
 

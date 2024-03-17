@@ -1,4 +1,4 @@
 export * from './button'
 export * from './typography'
-export * from './input'
+export * from './textbox'
 export * from './navigation'

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Meta, StoryObj } from '@storybook/react'
-import { Input } from './Input'
+import { Textbox } from './Textbox'
 
-const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
-  component: Input,
+const meta: Meta<typeof Textbox> = {
+  title: 'Components/Textbox',
+  component: Textbox,
   argTypes: {
     hasError: {
       control: 'boolean',
@@ -17,13 +17,13 @@ const meta: Meta<typeof Input> = {
 
 export default meta
 
-type Story = StoryObj<typeof Input>
+type Story = StoryObj<typeof Textbox>
 
 export const Default: Story = {
   render: (args) => {
     const [value, setValue] = useState('')
     return (
-      <Input
+      <Textbox
         {...args}
         ariaLabel="input"
         placeholder="Type here..."
@@ -38,7 +38,7 @@ export const WithError: Story = {
   render: (args) => {
     const [value, setValue] = useState('')
     return (
-      <Input
+      <Textbox
         {...args}
         ariaLabel="input"
         placeholder="Type here..."
