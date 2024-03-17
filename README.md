@@ -4,6 +4,8 @@ This is a Todo App built with React and Mock API.
 
 Design can be found here: [Figma](https://www.figma.com/file/oWgvLwCXRPrXTQGnq8atW3/To-Do-APP?nodeid=2%3A2).
 
+See the app live here: [Qooper TodoApp](https://qooper-react-exercise.vercel.app).
+
 # Demo
 
 https://github.com/tigerabrodi/qooper-react-exercise/assets/49603590/158c4377-94b4-459d-a357-772508aafc5a
