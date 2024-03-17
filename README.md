@@ -106,6 +106,8 @@ An example is the `Input` component where I added a hidden label associated with
 
 - To give the user some feedback when creating/editing/deleting a task, I added a disabled state during submission states.
 - I added tests for the button component for the sake of the assignment. However, it didn't feel necessary because we don't gain any new confidence by testing it. It's a simple component and not e.g. an Accordion component where we could test the open/close state as the user interacts with it.
+- Since I'm using TypeScript, I didn't add JSDoc, but I added TSDoc comments to the components' props.
+- To the creation experience, I focus on the input once user is done creating a task. This way, the user can continue creating tasks without having to click on the input again.
 
 # Tech Stack
 
