@@ -81,7 +81,7 @@ export function TodoRoute() {
         :(
       </Typography>
       <Typography variant="Text1" color="purple">
-        No tasks yet
+        There is no task yet!
       </Typography>
     </NoTasksWrapper>
   )
