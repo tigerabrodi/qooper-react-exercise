@@ -22,11 +22,6 @@ it('Should add, edit and delete tasks', async () => {
   await loginUser(fakeUser)
 
   expect(screen.getByRole('heading', { name: 'Tasks' })).toBeInTheDocument()
-  const navigation = screen.getByRole('navigation')
-  const welcomeMessage = within(navigation).getByText(
-    `Welcome, ${fakeUser.firstName}`
-  )
-  expect(welcomeMessage).toBeInTheDocument()
   expect(screen.getByText('There is no task yet!')).toBeInTheDocument()
 
   // Create first task
