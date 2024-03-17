@@ -100,23 +100,27 @@ An example is the `Textbox` component where I added a hidden label associated wi
 
 # Notes
 
-## Potential improvements
+## Future improvements
 
-- To improve the creation of a new task, I would add a submit button to the form to improve the user experience. We could e.g show the button as disabled if the input is empty.
+- Add a submit button to the task creation form to improve the user experience. We could e.g show the button as disabled if the input is empty.
 
-- Some more space between the input and error message would look nicer, but I stuck to the Figma design for now.
+- Some more space between the input and error message would look nicer. Error message could have a bigger font as well.
 
 - For Accessibility purposes, placeholders should be avoided as labels:
 
-  - Screen readers all may not voice the placeholders.
+  - All Screen readers may not voice the placeholder content.
   - Visibility: placeholders disappear when user types, so user may forget what the input is for.
   - Low contrast: placeholders typically have low contrast, so it may be hard to read for some users.
+
+- Implement CI to run tests and linting on every push.
+
+- Implement an E2E test to get more confidence, especially considering E2E uses a real browser simulating a real user.
 
 ## Improvements made
 
 - To give the user some feedback when creating/editing/deleting a task, I added a disabled state during submission states.
 
-- Since I'm using TypeScript, I didn't add JSDoc, but I added TSDoc comments to the components' props. This provides a nice developer experience when entering props of the component.
+- Since I'm using TypeScript, I didn't add JSDoc, but I added TSDoc comments to the components' props. This provides a nice developer experience when entering props of a component.
 
 - To improve the creation experience, I focus on the input once the user is done creating a task. This way, the user can continue creating tasks without having to click on the input again.
 
