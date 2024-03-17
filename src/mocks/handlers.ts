@@ -47,8 +47,6 @@ export const handlers = [
   http.post(`${BASE_API_URL}/users/:userId/tasks`, async ({ request }) => {
     const formData = (await request.json()) as TaskFormData
 
-    console.log('formData', formData)
-
     const newTask = {
       id: faker.string.uuid(),
       content: formData.content,
