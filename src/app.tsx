@@ -25,7 +25,7 @@ function Routes() {
           <Redirect to="/signin" />
         )}
       </Route>
-      <Route path="/signin">
+      <Route exact path="/signin">
         {currentUser ? <Redirect to="/" /> : <SignInRoute />}
       </Route>
     </Switch>
