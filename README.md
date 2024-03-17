@@ -8,7 +8,7 @@ See the app live here: [Qooper TodoApp](https://qooper-react-exercise.vercel.app
 
 # Demo
 
-https://github.com/tigerabrodi/qooper-react-exercise/assets/49603590/158c4377-94b4-459d-a357-772508aafc5a
+https://github.com/tigerabrodi/qooper-react-exercise/assets/49603590/8195ff99-7ac7-4dba-b383-d6abcf6eed2b
 
 # Run it locally
 
