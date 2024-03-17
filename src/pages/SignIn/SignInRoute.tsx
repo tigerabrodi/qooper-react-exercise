@@ -52,8 +52,8 @@ export function SignInRoute() {
     const { name, value } = event.target
     setFormData((prev) => ({ ...prev, [name]: value }))
 
-    const isAnyRequiredField = ['username', 'firstName'].includes(name)
-    if (isAnyRequiredField) {
+    const isUpdatingRequiredFields = ['username', 'firstName'].includes(name)
+    if (isUpdatingRequiredFields) {
       setFormErrors((prev) => ({ ...prev, [name]: value.trim() === '' }))
     }
   }
@@ -127,7 +127,7 @@ export function SignInRoute() {
                 onChange={handleChange}
               />
             </InputWrapper>
-            <Button fullWidth bgColor="blue" type="submit">
+            <Button fullWidth type="submit">
               LOGIN
             </Button>
           </Form>
