@@ -130,8 +130,9 @@ export function TaskItem({ task }: { task: Task }) {
       {isEditing ? (
         <EditForm onSubmit={handlEditSubmit} ref={ref}>
           <Input
-            ariaLabel="Edit task"
-            name="task"
+            ariaLabel={`Edit task ${task.content}`}
+            name="editTask"
+            id="editTask"
             type="text"
             placeholder="Type a task and press Enter to add"
             disabled={editingTaskStatus === 'loading'}
