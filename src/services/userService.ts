@@ -7,11 +7,19 @@ type CreateUserParams = {
 }
 
 export async function createUser(userData: CreateUserParams) {
-  const response = await fetch(`${BASE_API_URL}/users`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(userData),
-  })
+  try {
+    const response = await fetch(`${BASE_API_URL}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    })
 
-  return await response.json()
+    if (!response.ok) {
+      throw new Error('Failed to create user')
+    }
+
+    return await response.json()
+  } catch (error) {
+    throw new Error(`An error occurred while creating the user: ${error}`)
+  }
 }
