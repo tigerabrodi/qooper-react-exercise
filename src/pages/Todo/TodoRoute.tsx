@@ -92,7 +92,8 @@ export function TodoRoute() {
         <StyledInput
           placeholder="Type a task and press Enter to add"
           ariaLabel="Type a task and press Enter to add"
-          name="task"
+          name="newTask"
+          id="newTask"
           type="text"
           disabled={addingTaskStatus === 'loading'}
           fullWidth
