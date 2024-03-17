@@ -27,14 +27,14 @@ it('Should add, edit and delete tasks', async () => {
     `Welcome, ${fakeUser.firstName}`
   )
   expect(welcomeMessage).toBeInTheDocument()
-  expect(screen.getByText('No tasks yet')).toBeInTheDocument()
+  expect(screen.getByText('There is no task yet!')).toBeInTheDocument()
 
   // Create first task
   const taskInput = screen.getByLabelText('Type a task and press Enter to add')
   await userEvent.type(taskInput, firstTask.content)
   await userEvent.type(taskInput, '{enter}')
 
-  expect(screen.queryByText('No tasks yet')).not.toBeInTheDocument()
+  expect(screen.queryByText('There is no task yet!')).not.toBeInTheDocument()
 
   const listItem = screen.getByRole('listitem')
   expect(listItem).toHaveTextContent(firstTask.content)
@@ -80,7 +80,7 @@ it('Should add, edit and delete tasks', async () => {
   await userEvent.click(deleteSecondTaskButton)
   expect(screen.queryByText(secondTask.content)).not.toBeInTheDocument()
 
-  expect(screen.getByText('No tasks yet')).toBeInTheDocument()
+  expect(screen.getByText('There is no task yet!')).toBeInTheDocument()
 })
 
 it('Should not add task if input is empty', async () => {
@@ -93,5 +93,5 @@ it('Should not add task if input is empty', async () => {
   const taskInput = screen.getByLabelText('Type a task and press Enter to add')
   await userEvent.type(taskInput, SPACE)
   await userEvent.type(taskInput, '{enter}')
-  expect(screen.getByText('No tasks yet')).toBeInTheDocument()
+  expect(screen.getByText('There is no task yet!')).toBeInTheDocument()
 })
