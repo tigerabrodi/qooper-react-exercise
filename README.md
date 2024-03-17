@@ -6,6 +6,8 @@ Design can be found here: [Figma](https://www.figma.com/file/oWgvLwCXRPrXTQGnq8a
 
 # Demo
 
+https://github.com/tigerabrodi/qooper-react-exercise/assets/49603590/158c4377-94b4-459d-a357-772508aafc5a
+
 # Run it locally
 
 ## Install dependencies
