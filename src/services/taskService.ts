@@ -83,7 +83,7 @@ export async function getTasks({ currentUser }: GetTasksParams) {
 
   const hasNoTasks = !response.ok && response.status === 404
   if (hasNoTasks) {
-    return { tasks: [] }
+    return []
   }
 
   if (!response.ok) {
