@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { User } from '../helpers'
+import { LOCAL_STORAGE_KEYS, User } from '../helpers'
 import { createUser } from '../services'
 
 export type CurrentUser = Pick<User, 'id' | 'firstName'> | null
@@ -25,14 +25,19 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [hasInitializedAuthState, setHasInitializedAuthState] = useState(false)
   const history = useHistory()
 
+  function clearLocalStorage() {
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.token)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.user)
+  }
+
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    const user = localStorage.getItem('user')
+    const token = localStorage.getItem(LOCAL_STORAGE_KEYS.token)
+    const user = localStorage.getItem(LOCAL_STORAGE_KEYS.user)
     if (token && user) {
       setCurrentUser(JSON.parse(user))
       setHasInitializedAuthState(true)
     } else {
-      localStorage.clear()
+      clearLocalStorage()
       setHasInitializedAuthState(true)
     }
   }, [])
@@ -42,20 +47,22 @@ export function UserProvider({ children }: { children: ReactNode }) {
       const user = await createUser(userData)
       const newCurrentUser = { id: user.id, firstName: user.firstName }
 
-      localStorage.setItem('token', user.token)
-      localStorage.setItem('user', JSON.stringify(newCurrentUser))
+      localStorage.setItem(LOCAL_STORAGE_KEYS.token, user.token)
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.user,
+        JSON.stringify(newCurrentUser)
+      )
 
       setCurrentUser(newCurrentUser)
 
       history.push('/')
     } catch (error) {
-      console.error(error)
+      throw new Error(`An error occurred while logging in: ${error}`)
     }
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    clearLocalStorage()
     setCurrentUser(null)
     history.push('/signin')
   }
