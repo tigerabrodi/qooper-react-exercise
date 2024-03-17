@@ -40,19 +40,19 @@ const StyledInput = styled.input<StyledInputProps>`
   }
 `
 
-const ErrorMessage = styled.span`
-  ${baseTextStyles}
-  visibility: ${({ children }) =>
-    children ? 'visible' : 'hidden'}; // Hide the message but reserve space
-  margin-left: 16px;
-  height: 20px;
+const ErrorMessage = styled.span<{ $isVisible: boolean }>`
   font-size: calc(1rem * 10 / 16);
   color: ${({ theme }) => theme.colors.red};
+  position: absolute;
+  bottom: -16px;
+  left: 16px;
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
 `
 
 const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
+  position: relative;
   width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
 `
 
@@ -72,7 +72,7 @@ export const Input = ({
     <InputWrapper $fullWidth={fullWidth} className={className}>
       <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
       <StyledInput $hasError={hasError} {...inputProps} />
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage $isVisible={Boolean(hasError)}>{errorMessage}</ErrorMessage>
     </InputWrapper>
   )
 }
