@@ -19,12 +19,14 @@ const Heading = styled.h1<StyledTypographyProps>`
 const Text1 = styled.p<StyledTypographyProps>`
   ${baseTextStyles}
   font-weight: 400;
+  line-height: 1.14;
   color: ${({ theme, $color }) => theme.colors[$color || 'black']};
 `
 
 const Text2 = styled.span<StyledTypographyProps>`
   ${baseTextStyles}
   font-weight: 600;
+  line-height: 1.43;
   color: ${({ theme, $color }) => theme.colors[$color || 'black']};
 `
 
