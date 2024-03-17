@@ -105,6 +105,7 @@ An example is the `Input` component where I added a hidden label associated with
   - Low contrast: placeholders typically have low contrast, so it may be hard to read for some users.
 
 - To give the user some feedback when creating/editing/deleting a task, I added a disabled state during submission states.
+- I added tests for the button component for the sake of the assignment. However, it didn't feel necessary because we don't gain any new confidence by testing it. It's a simple component and not e.g. an Accordion component where we could test the open/close state as the user interacts with it.
 
 # Tech Stack
 
