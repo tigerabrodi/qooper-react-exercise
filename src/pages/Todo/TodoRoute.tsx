@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Input, Typography } from '../../components'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { Status } from '../../helpers'
 import { useUser } from '../../hooks'
 import { TaskList } from './TaskList'
@@ -44,6 +44,14 @@ export function TodoRoute() {
   const [addingTaskStatus, setAddingTaskStatus] = useState<Status>('idle')
 
   const { tasks, isFetchingTasks, setTasks } = useTodo()
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (addingTaskStatus === 'success') {
+      inputRef.current?.focus()
+    }
+  }, [addingTaskStatus])
 
   function handleTaskInputChange(event: ChangeEvent<HTMLInputElement>) {
     setTaskInputValue(event.target.value)
@@ -95,6 +103,7 @@ export function TodoRoute() {
           name="newTask"
           id="newTask"
           type="text"
+          ref={inputRef}
           disabled={addingTaskStatus === 'loading'}
           fullWidth
           value={taskInputValue}

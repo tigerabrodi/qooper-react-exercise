@@ -29,6 +29,8 @@ it('Should add, edit and delete tasks', async () => {
   await userEvent.type(taskInput, firstTask.content)
   await userEvent.type(taskInput, '{enter}')
 
+  expect(taskInput).toHaveFocus()
+
   expect(screen.queryByText('There is no task yet!')).not.toBeInTheDocument()
 
   const listItem = screen.getByRole('listitem')

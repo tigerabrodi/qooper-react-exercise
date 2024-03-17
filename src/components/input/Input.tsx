@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { baseTextStyles } from '..'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, forwardRef } from 'react'
 import { srOnlyStyles } from '../../theme'
 import { ClassNameProps } from '../../helpers'
 
@@ -71,19 +71,17 @@ const HiddenLabel = styled.label`
   ${srOnlyStyles}
 `
 
-export const Input = ({
-  errorMessage,
-  hasError,
-  ariaLabel,
-  fullWidth,
-  className,
-  ...inputProps
-}: InputProps & ClassNameProps) => {
-  return (
-    <InputWrapper $fullWidth={fullWidth} className={className}>
-      <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
-      <StyledInput $hasError={hasError} {...inputProps} />
-      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </InputWrapper>
-  )
-}
+export const Input = forwardRef<HTMLInputElement, InputProps & ClassNameProps>(
+  (
+    { errorMessage, hasError, ariaLabel, fullWidth, className, ...inputProps },
+    ref
+  ) => {
+    return (
+      <InputWrapper $fullWidth={fullWidth} className={className}>
+        <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
+        <StyledInput $hasError={hasError} ref={ref} {...inputProps} />
+        {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </InputWrapper>
+    )
+  }
+)
