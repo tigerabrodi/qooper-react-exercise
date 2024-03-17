@@ -52,7 +52,7 @@ npm run storybook
 
 # Thought process
 
-Looking at the design, we already had reusable components designed. I decided to use Storybook to build the components in isolation and then start building the app.
+Looking at the design, there were reusable components in place. I decided to use Storybook to build those components in isolation and then start building the app.
 
 # Architecture
 
@@ -100,18 +100,29 @@ An example is the `Input` component where I added a hidden label associated with
 
 # Notes
 
+## Potential improvements
+
 - To improve the creation of a new task, I would add a submit button to the form to improve the user experience. We could e.g show the button as disabled if the input is empty.
+
 - Some more space between the input and error message would look nicer, but I stuck to the Figma design for now.
+
 - For Accessibility purposes, placeholders should be avoided as labels:
 
   - Screen readers all may not voice the placeholders.
   - Visibility: placeholders disappear when user types, so user may forget what the input is for.
   - Low contrast: placeholders typically have low contrast, so it may be hard to read for some users.
 
+## Improvements made
+
 - To give the user some feedback when creating/editing/deleting a task, I added a disabled state during submission states.
+
+- Since I'm using TypeScript, I didn't add JSDoc, but I added TSDoc comments to the components' props. This provides a nice developer experience when entering props of the component.
+
+- To improve the creation experience, I focus on the input once the user is done creating a task. This way, the user can continue creating tasks without having to click on the input again.
+
+## Testing
+
 - I added tests for the button component for the sake of the assignment. However, it didn't feel necessary because we don't gain any new confidence by testing it. It's a simple component and not e.g. an Accordion component where we could test the open/close state as the user interacts with it.
-- Since I'm using TypeScript, I didn't add JSDoc, but I added TSDoc comments to the components' props.
-- To the creation experience, I focus on the input once user is done creating a task. This way, the user can continue creating tasks without having to click on the input again.
 
 # Tech Stack
 
@@ -121,3 +132,4 @@ An example is the `Input` component where I added a hidden label associated with
 - Storybook
 - Vitest
 - Testing Library
+- MSW
