@@ -6,7 +6,13 @@ import { ButtonHTMLAttributes, ReactNode } from 'react'
 
 type ButtonProps = {
   children: ReactNode
+  /**
+   * The background color of the button, either blue or purple, defaults to blue.
+   */
   bgColor?: Extract<Colors, 'blue' | 'purple'>
+  /**
+   * If true, the button will take the full width of its container.
+   */
   fullWidth?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 

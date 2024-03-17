@@ -29,8 +29,17 @@ const Text2 = styled.span<StyledTypographyProps>`
 `
 
 type TypographyProps = {
+  /**
+   * The variant of the typography. Heading is an `h1`, Text1 is a `p`, and Text2 is a `span`.
+   */
   variant: 'Heading' | 'Text1' | 'Text2'
+  /**
+   * The content to display.
+   */
   children: ReactNode
+  /**
+   * The color of the text.
+   */
   color?: Colors
 }
 

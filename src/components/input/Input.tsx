@@ -5,9 +5,21 @@ import { srOnlyStyles } from '../../theme'
 import { ClassNameProps } from '../../helpers'
 
 export type InputProps = {
+  /**
+   * The accessible label for the input.
+   */
   ariaLabel: string
+  /**
+   * Flag to indicate if the input has an error.
+   */
   hasError?: boolean
+  /**
+   * The error message to display when `hasError` is true.
+   */
   errorMessage?: string
+  /**
+   * If true, the input will take the full width of its container.
+   */
   fullWidth?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
