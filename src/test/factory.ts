@@ -7,3 +7,9 @@ export function createFakeUser() {
     lastName: faker.person.lastName(),
   }
 }
+
+export function createFakeTask() {
+  return {
+    content: faker.lorem.sentence(),
+  }
+}

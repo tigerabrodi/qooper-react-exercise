@@ -1,15 +1,13 @@
-import { render } from '@testing-library/react'
-import { AppProviders } from '../context'
-import { ReactElement } from 'react'
+import { userEvent, screen } from '.'
 
-function customRender(ui: ReactElement, options = {}) {
-  return render(ui, {
-    wrapper: AppProviders,
-    ...options,
-  })
+export async function loginUser(fakeUser: {
+  username: string
+  firstName: string
+  lastName: string
+}) {
+  await userEvent.type(screen.getByLabelText('username'), fakeUser.username)
+  await userEvent.type(screen.getByLabelText('first name'), fakeUser.firstName)
+  await userEvent.type(screen.getByLabelText('last name'), fakeUser.firstName)
+
+  await userEvent.click(screen.getByRole('button', { name: 'LOGIN' }))
 }
-
-export * from '@testing-library/react'
-export { default as userEvent } from '@testing-library/user-event'
-// override render export
-export { customRender as render }
