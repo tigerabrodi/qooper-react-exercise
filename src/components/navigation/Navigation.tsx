@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Button, Typography } from '..'
-import { CurrentUser } from '../../context'
 
 const Nav = styled.nav`
   width: 100%;
@@ -17,17 +16,17 @@ const Wrapper = styled.div`
 `
 
 type NavigationProps = {
-  currentUser: CurrentUser
+  user: {
+    firstName: string
+  }
   logout: () => void
 }
 
-export function Navigation({ currentUser, logout }: NavigationProps) {
+export function Navigation({ user, logout }: NavigationProps) {
   return (
     <Nav>
       <Wrapper>
-        <Typography variant="Text1">
-          Welcome, {currentUser?.firstName}
-        </Typography>
+        <Typography variant="Text1">Welcome, {user.firstName}</Typography>
         <Button onClick={logout} type="button">
           LOGOUT
         </Button>

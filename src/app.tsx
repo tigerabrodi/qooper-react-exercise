@@ -18,7 +18,7 @@ function Routes() {
       <Route exact path="/">
         {currentUser ? (
           <TodoProvider>
-            <Navigation currentUser={currentUser} logout={logout} />
+            <Navigation user={currentUser} logout={logout} />
             <TodoRoute />
           </TodoProvider>
         ) : (
