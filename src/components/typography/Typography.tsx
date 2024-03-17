@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import type { Colors } from '../../theme'
-import { baseTextStyles } from './variables'
 import { ReactNode } from 'react'
 import { ClassNameProps } from '../../helpers'
+import { baseTextStyles } from './variables'
 
 type StyledTypographyProps = {
   $color?: Colors
@@ -11,7 +11,7 @@ type StyledTypographyProps = {
 const Heading = styled.h1<StyledTypographyProps>`
   font-size: calc(1rem * 18 / 16);
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.5;
   letter-spacing: 0;
   color: ${({ theme, $color }) => theme.colors[$color || 'black']};
 `
