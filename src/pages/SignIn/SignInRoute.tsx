@@ -25,6 +25,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  row-gap: 16px;
 `
 
 const LoadingWrapper = styled.div`
@@ -101,7 +102,7 @@ export function SignInRoute() {
                 value={formData.username}
                 onChange={handleChange}
                 hasError={formErrors.username}
-                errorMessage={formErrors.username ? 'Username is required' : ''}
+                errorMessage="Username is required"
               />
               <Input
                 name="firstName"
@@ -113,9 +114,7 @@ export function SignInRoute() {
                 value={formData.firstName}
                 onChange={handleChange}
                 hasError={formErrors.firstName}
-                errorMessage={
-                  formErrors.firstName ? 'First name is required' : ''
-                }
+                errorMessage="First name is required"
               />
               <Input
                 name="lastName"
