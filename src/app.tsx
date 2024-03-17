@@ -7,7 +7,7 @@ import { useUser } from './hooks'
 import { Navigation } from './components'
 
 function Routes() {
-  const { currentUser, hasInitializedAuthState } = useUser()
+  const { currentUser, logout, hasInitializedAuthState } = useUser()
 
   if (!hasInitializedAuthState) {
     return null
@@ -18,7 +18,7 @@ function Routes() {
       <Route exact path="/">
         {currentUser ? (
           <TodoProvider>
-            <Navigation />
+            <Navigation currentUser={currentUser} logout={logout} />
             <TodoRoute />
           </TodoProvider>
         ) : (

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Button, Typography } from '..'
-import { useUser } from '../../hooks'
+import { CurrentUser } from '../../context'
 
 const Nav = styled.nav`
   width: 100%;
@@ -16,9 +16,12 @@ const Wrapper = styled.div`
   justify-content: end;
 `
 
-export function Navigation() {
-  const { currentUser, logout } = useUser()
+type NavigationProps = {
+  currentUser: CurrentUser
+  logout: () => void
+}
 
+export function Navigation({ currentUser, logout }: NavigationProps) {
   return (
     <Nav>
       <Wrapper>
