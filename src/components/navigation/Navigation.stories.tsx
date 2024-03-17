@@ -10,7 +10,7 @@ type Story = StoryObj<typeof Navigation>
 
 export const LoggedIn: Story = {
   args: {
-    currentUser: { id: '1', firstName: 'John' },
+    user: { firstName: 'John' },
     logout: () => console.log('Logout function triggered'),
   },
 }
