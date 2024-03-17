@@ -40,13 +40,12 @@ const StyledInput = styled.input<StyledInputProps>`
   }
 `
 
-const ErrorMessage = styled.span<{ $isVisible: boolean }>`
+const ErrorMessage = styled.span`
   font-size: calc(1rem * 10 / 16);
   color: ${({ theme }) => theme.colors.red};
   position: absolute;
   bottom: -16px;
   left: 16px;
-  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
 `
 
 const InputWrapper = styled.div<{ $fullWidth?: boolean }>`
@@ -72,7 +71,7 @@ export const Input = ({
     <InputWrapper $fullWidth={fullWidth} className={className}>
       <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
       <StyledInput $hasError={hasError} {...inputProps} />
-      <ErrorMessage $isVisible={Boolean(hasError)}>{errorMessage}</ErrorMessage>
+      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </InputWrapper>
   )
 }
