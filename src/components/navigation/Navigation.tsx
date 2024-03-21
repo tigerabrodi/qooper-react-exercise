@@ -16,17 +16,15 @@ const Wrapper = styled.div`
 `
 
 type NavigationProps = {
-  user: {
-    firstName: string
-  }
+  welcomeMessage: string
   logout: () => void
 }
 
-export function Navigation({ user, logout }: NavigationProps) {
+export function Navigation({ logout, welcomeMessage }: NavigationProps) {
   return (
     <Nav>
       <Wrapper>
-        <Typography variant="Text1">Welcome, {user.firstName}</Typography>
+        <Typography variant="Text1">{welcomeMessage}</Typography>
         <Button onClick={logout} type="button">
           LOGOUT
         </Button>

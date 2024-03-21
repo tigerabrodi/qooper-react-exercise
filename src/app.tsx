@@ -18,7 +18,10 @@ function Routes() {
       <Route exact path="/">
         {currentUser ? (
           <TodoProvider>
-            <Navigation user={currentUser} logout={logout} />
+            <Navigation
+              welcomeMessage={`Welcome, ${currentUser.firstName}`}
+              logout={logout}
+            />
             <TodoRoute />
           </TodoProvider>
         ) : (
