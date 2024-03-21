@@ -1,15 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Typography } from './Typography'
-import { theme } from '../../theme'
 
 const meta: Meta<typeof Typography> = {
   component: Typography,
-  argTypes: {
-    color: {
-      control: 'select',
-      options: Object.keys(theme.colors),
-    },
-  },
 }
 
 export default meta
