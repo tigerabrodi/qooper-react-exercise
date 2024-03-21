@@ -66,7 +66,7 @@ export function TaskItem({ task }: { task: Task }) {
   const { currentUser } = useUser()
   const { setTasks } = useTodo()
 
-  const ref = useClickAway<HTMLFormElement>(() => {
+  const editFormRef = useClickAway<HTMLFormElement>(() => {
     setIsEditing(false)
   })
 
@@ -128,7 +128,7 @@ export function TaskItem({ task }: { task: Task }) {
   return (
     <TaskItemWrapper $isDeleting={isDeletingTaskStatus === 'loading'}>
       {isEditing ? (
-        <EditForm onSubmit={handlEditSubmit} ref={ref}>
+        <EditForm onSubmit={handlEditSubmit} ref={editFormRef}>
           <Textbox
             ariaLabel={`Edit task ${task.content}`}
             name="editTask"
