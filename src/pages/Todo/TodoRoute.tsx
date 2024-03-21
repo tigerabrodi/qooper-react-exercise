@@ -73,7 +73,7 @@ export function TodoRoute() {
     }
 
     try {
-      const addedTask = await createTask({ currentUser, newTask })
+      const addedTask = await createTask({ userId: currentUser.id, newTask })
 
       setTasks((prevTasks) => [...prevTasks, addedTask])
       setTaskInputValue('')

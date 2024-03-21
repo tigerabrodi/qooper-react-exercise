@@ -30,7 +30,7 @@ export function TodoProvider({ children }: { children: ReactNode }) {
       if (!currentUser) return
 
       try {
-        const tasks = await getTasks({ currentUser })
+        const tasks = await getTasks({ userId: currentUser.id })
         setTasks(tasks)
         setFetchingTaskStatus('success')
       } catch (error) {

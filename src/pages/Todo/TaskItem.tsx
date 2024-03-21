@@ -93,7 +93,7 @@ export function TaskItem({ task }: { task: Task }) {
 
     try {
       const addedTask = await updateTask({
-        currentUser,
+        userId: currentUser.id,
         taskId: task.id,
         newTask,
       })
@@ -115,7 +115,7 @@ export function TaskItem({ task }: { task: Task }) {
     setIsDeletingTaskStatus('loading')
 
     try {
-      await deleteTask({ currentUser, taskId: task.id })
+      await deleteTask({ userId: currentUser.id, taskId: task.id })
 
       setTasks((prev) => prev.filter((t) => t.id !== task.id))
 

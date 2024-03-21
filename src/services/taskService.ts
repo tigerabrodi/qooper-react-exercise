@@ -1,22 +1,19 @@
-import { CurrentUser } from '../context'
 import { BASE_API_URL } from '../helpers'
 
 type UpdateTaskParams = {
   taskId: string
   newTask: { content: string; completed: boolean }
-  currentUser: CurrentUser
+  userId: string
 }
 
 export async function updateTask({
   taskId,
   newTask,
-  currentUser,
+  userId,
 }: UpdateTaskParams) {
-  if (!currentUser) return
-
   try {
     const response = await fetch(
-      `${BASE_API_URL}/users/${currentUser.id}/tasks/${taskId}`,
+      `${BASE_API_URL}/users/${userId}/tasks/${taskId}`,
       {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
@@ -36,15 +33,15 @@ export async function updateTask({
 
 type DeleteTaskParams = {
   taskId: string
-  currentUser: CurrentUser
+  userId: string
 }
 
-export async function deleteTask({ taskId, currentUser }: DeleteTaskParams) {
-  if (!currentUser) return
+export async function deleteTask({ taskId, userId }: DeleteTaskParams) {
+  if (!userId) return
 
   try {
     const response = await fetch(
-      `${BASE_API_URL}/users/${currentUser.id}/tasks/${taskId}`,
+      `${BASE_API_URL}/users/${userId}/tasks/${taskId}`,
       {
         method: 'DELETE',
       }
@@ -60,21 +57,16 @@ export async function deleteTask({ taskId, currentUser }: DeleteTaskParams) {
 
 type CreateTaskParams = {
   newTask: { content: string; completed: boolean }
-  currentUser: CurrentUser
+  userId: string
 }
 
-export async function createTask({ newTask, currentUser }: CreateTaskParams) {
-  if (!currentUser) return
-
+export async function createTask({ newTask, userId }: CreateTaskParams) {
   try {
-    const response = await fetch(
-      `${BASE_API_URL}/users/${currentUser.id}/tasks`,
-      {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(newTask),
-      }
-    )
+    const response = await fetch(`${BASE_API_URL}/users/${userId}/tasks`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newTask),
+    })
 
     if (!response.ok) {
       throw new Error('Failed to create task')
@@ -87,16 +79,12 @@ export async function createTask({ newTask, currentUser }: CreateTaskParams) {
 }
 
 type GetTasksParams = {
-  currentUser: CurrentUser
+  userId: string
 }
 
-export async function getTasks({ currentUser }: GetTasksParams) {
-  if (!currentUser) return
-
+export async function getTasks({ userId }: GetTasksParams) {
   try {
-    const response = await fetch(
-      `${BASE_API_URL}/users/${currentUser.id}/tasks`
-    )
+    const response = await fetch(`${BASE_API_URL}/users/${userId}/tasks`)
 
     if (response.ok) {
       return await response.json()
