@@ -4,7 +4,7 @@ import { InputHTMLAttributes, forwardRef } from 'react'
 import { srOnlyStyles } from '../../theme'
 import { ClassNameProps } from '../../helpers'
 
-type BaseTextboxProps = {
+type TextboxProps = {
   /**
    * The accessible label for the input.
    */
@@ -13,9 +13,6 @@ type BaseTextboxProps = {
    * If true, the input will take the full width of its container.
    */
   fullWidth?: boolean
-} & InputHTMLAttributes<HTMLInputElement>
-
-type TextErrorProps = BaseTextboxProps & {
   /**
    * Flag to indicate if the input has an error.
    */
@@ -24,9 +21,7 @@ type TextErrorProps = BaseTextboxProps & {
    * The error message to display when `hasError` is true.
    */
   errorMessage?: string
-}
-
-type TextboxProps = BaseTextboxProps | TextErrorProps
+} & InputHTMLAttributes<HTMLInputElement>
 
 type StyledInputProps = {
   $hasError?: boolean
@@ -79,14 +74,17 @@ const HiddenLabel = styled.label`
 export const Textbox = forwardRef<
   HTMLInputElement,
   TextboxProps & ClassNameProps
->(({ ariaLabel, fullWidth, className, ...inputProps }, ref) => {
-  const { hasError, errorMessage } = inputProps as TextErrorProps
-
-  return (
-    <Wrapper $fullWidth={fullWidth} className={className}>
-      <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
-      <StyledInput $hasError={hasError} ref={ref} {...inputProps} />
-      {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </Wrapper>
-  )
-})
+>(
+  (
+    { ariaLabel, fullWidth, className, hasError, errorMessage, ...inputProps },
+    ref
+  ) => {
+    return (
+      <Wrapper $fullWidth={fullWidth} className={className}>
+        <HiddenLabel htmlFor={inputProps.name}>{ariaLabel}</HiddenLabel>
+        <StyledInput $hasError={hasError} ref={ref} {...inputProps} />
+        {hasError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </Wrapper>
+    )
+  }
+)
